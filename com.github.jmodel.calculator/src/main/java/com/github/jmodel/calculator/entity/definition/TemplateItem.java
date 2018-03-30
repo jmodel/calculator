@@ -8,9 +8,19 @@ import com.github.jmodel.calculator.entity.Item;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TemplateItem extends Item {
 
+	private List<String> attributes;
+
 	private List<StepDef> stepDefs;
 
 	private List<Router> routers;
+
+	public List<String> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<String> attributes) {
+		this.attributes = attributes;
+	}
 
 	public List<StepDef> getStepDefs() {
 		return stepDefs;

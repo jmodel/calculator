@@ -7,6 +7,7 @@ import java.util.function.BiConsumer;
 import com.github.jmodel.calculator.CalculatorTerms;
 import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.definition.AggregationDef;
+import com.github.jmodel.calculator.entity.definition.Condition;
 import com.github.jmodel.calculator.entity.definition.StepDef;
 import com.github.jmodel.calculator.entity.definition.Template;
 import com.github.jmodel.calculator.entity.definition.TemplateItem;
@@ -42,13 +43,36 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 			StepDef depStepDef = stepDefs.get(depStepIndex);
 			Step depStep = steps.get(depStepIndex);
 
-			step.setValue(calculate(context, stepDef, step, depStepDef, depStep));
+			boolean isValid = true;
+			List<Condition> conditions = stepDef.getConditions();
+			if (conditions != null && conditions.size() > 0) {
+				for (Condition condition : conditions) {
 
-			String operatorTerm = stepDef.getOperatorTerm();
-			if (operatorTerm != null && operatorTerm.equals(CalculatorTerms.OPERATOR_SUBSTRACT)) {
-				step.setCvalue(depStep.getCvalue().subtract(step.getValue()));
+					InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
+							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm());
+					if (matchedInstanceItem != null) {
+						String attributeValue = (String) matchedInstanceItem.getAttributes()
+								.get(condition.getMapToAttribute());
+						if (!(condition.getExpectValue().equals(attributeValue))) {
+							isValid = false;
+							break;
+						}
+					}
+				}
+			}
+
+			if (isValid) {
+				step.setValue(calculate(context, stepDef, step, depStepDef, depStep));
+
+				String operatorTerm = stepDef.getOperatorTerm();
+				if (operatorTerm != null && operatorTerm.equals(CalculatorTerms.OPERATOR_SUBSTRACT)) {
+					step.setCvalue(depStep.getCvalue().subtract(step.getValue()));
+				} else {
+					step.setCvalue(step.getValue());
+				}
 			} else {
-				step.setCvalue(step.getValue());
+				step.setValue(BigDecimal.ZERO);
+				step.setCvalue(depStep.getCvalue());
 			}
 		} else {
 			step.setValue(calculate(context, stepDef, step, null, null));
@@ -74,6 +98,22 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 				}
 			}
 		});
+	}
+
+	protected InstanceItem findInstanceElement(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
+			String mapToTemplateItemTerm) {
+
+		if (instanceItem.getTypeTerm().equals(mapToTemplateItemTypeTerm)
+				&& instanceItem.getTemplateTerm().equals(mapToTemplateItemTerm)) {
+			return instanceItem;
+		}
+
+		if (instanceItem.getParentInstanceItem() == null) {
+			return null;
+		}
+
+		return findInstanceElement(instanceItem.getParentInstanceItem(), mapToTemplateItemTypeTerm,
+				mapToTemplateItemTerm);
 	}
 
 	protected abstract BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef,

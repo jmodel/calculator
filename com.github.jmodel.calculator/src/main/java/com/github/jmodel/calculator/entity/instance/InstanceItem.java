@@ -19,6 +19,8 @@ public class InstanceItem extends Item {
 	@JsonIgnore
 	private InstanceItem parentInstanceItem;
 
+	private Map<String, String> attributes;
+
 	private List<Step> steps;
 
 	public String getTemplateTerm() {
@@ -43,6 +45,14 @@ public class InstanceItem extends Item {
 
 	public void setParentInstanceItem(InstanceItem parentInstanceItem) {
 		this.parentInstanceItem = parentInstanceItem;
+	}
+
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
 	}
 
 	public List<Step> getSteps() {

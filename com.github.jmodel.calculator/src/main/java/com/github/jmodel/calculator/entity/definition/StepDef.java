@@ -1,5 +1,7 @@
 package com.github.jmodel.calculator.entity.definition;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,7 +19,7 @@ public final class StepDef {
 
 	private boolean useCvalue = false;
 
-	private boolean isValid = true;
+	private List<Condition> conditions;
 
 	public String getTypeTerm() {
 		return typeTerm;
@@ -67,12 +69,12 @@ public final class StepDef {
 		this.useCvalue = useCvalue;
 	}
 
-	public boolean isValid() {
-		return isValid;
+	public List<Condition> getConditions() {
+		return conditions;
 	}
 
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
+	public void setConditions(List<Condition> conditions) {
+		this.conditions = conditions;
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.github.jmodel.calculator.entity;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -12,9 +11,7 @@ public abstract class Item {
 
 	private String term;
 
-	private Map<String, String> attributes;
-
-	private BigDecimal value;
+	private BigDecimal value = BigDecimal.ZERO;
 
 	public String getTypeTerm() {
 		return typeTerm;
@@ -30,14 +27,6 @@ public abstract class Item {
 
 	public void setTerm(String term) {
 		this.term = term;
-	}
-
-	public Map<String, String> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
 	}
 
 	public BigDecimal getValue() {

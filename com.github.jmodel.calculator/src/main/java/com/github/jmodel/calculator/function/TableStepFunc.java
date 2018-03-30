@@ -92,20 +92,4 @@ public final class TableStepFunc extends StepFunc {
 		return table.getData()[y][x];
 	}
 
-	private InstanceItem findInstanceElement(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
-			String mapToTemplateItemTerm) {
-
-		if (instanceItem.getTypeTerm().equals(mapToTemplateItemTypeTerm)
-				&& instanceItem.getTemplateTerm().equals(mapToTemplateItemTerm)) {
-			return instanceItem;
-		}
-
-		if (instanceItem.getParentInstanceItem() == null) {
-			return null;
-		}
-
-		return findInstanceElement(instanceItem.getParentInstanceItem(), mapToTemplateItemTypeTerm,
-				mapToTemplateItemTerm);
-	}
-
 }
