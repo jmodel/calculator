@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../com.github.jmodel.adapter.parent/pom.xml</relativePath>
+		<groupId>com.github.jmodel</groupId>
+		<artifactId>com.github.jmodel.adapter.parent</artifactId>
+		<version>0.0.2</version>
+	</parent>
+
+	<artifactId>com.github.jmodel.adapter.example</artifactId>
+	<packaging>jar</packaging>
+
+	<name>jmodel-adapter Example</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.adapter.impl</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.jmodel</groupId>
+			<artifactId>com.github.jmodel.japp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version>
+		</dependency>
+
+	</dependencies>
+</project>
+
+
+
+
+
+
