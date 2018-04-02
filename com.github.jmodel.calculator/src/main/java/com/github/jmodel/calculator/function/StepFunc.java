@@ -100,6 +100,16 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 		});
 	}
 
+	protected String findRawAttributeValue(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
+			String mapToTemplateItemTerm, String mapToAttribute) {
+		InstanceItem foundInstanceItem = findInstanceElement(instanceItem, mapToTemplateItemTypeTerm,
+				mapToTemplateItemTerm);
+		if (foundInstanceItem != null && foundInstanceItem.getAttributes() != null) {
+			return foundInstanceItem.getAttributes().get(mapToAttribute);
+		}
+		return null;
+	}
+
 	protected InstanceItem findInstanceElement(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
 			String mapToTemplateItemTerm) {
 

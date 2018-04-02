@@ -5,14 +5,12 @@ import java.util.List;
 
 import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.definition.Condition;
+import com.github.jmodel.calculator.entity.definition.Matchable;
 import com.github.jmodel.calculator.entity.definition.Router;
 import com.github.jmodel.calculator.entity.definition.StepDef;
 import com.github.jmodel.calculator.entity.definition.table.Table;
 import com.github.jmodel.calculator.entity.definition.table.TableMeta;
-import com.github.jmodel.calculator.entity.definition.table.TableRowMeta;
-import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.instance.Step;
-import com.github.jmodel.calculator.entity.instance.table.Point;
 
 public final class TableStepFunc extends StepFunc {
 
@@ -34,6 +32,7 @@ public final class TableStepFunc extends StepFunc {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 
@@ -48,12 +47,10 @@ public final class TableStepFunc extends StepFunc {
 			List<Condition> conditions = router.getConditions();
 			if (conditions != null && conditions.size() > 0) {
 				for (Condition condition : conditions) {
-
-					InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
-							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm());
-					if (matchedInstanceItem != null) {
-						String attributeValue = (String) matchedInstanceItem.getAttributes()
-								.get(condition.getMapToAttribute());
+					String attributeValue = findRawAttributeValue(context.getInstanceItem(),
+							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm(),
+							condition.getMapToAttribute());
+					if (attributeValue != null) {
 						if (!(condition.getExpectValue().equals(attributeValue))) {
 							passed = false;
 							break;
@@ -70,23 +67,36 @@ public final class TableStepFunc extends StepFunc {
 			throw new RuntimeException("TODO xxxxxxxxxxxxxxxxx");
 		}
 
-		// if (coverage.getQuotation().isMonthly()) {
-		// rateTable = coverageDef.getMonthlyRateTable();
-		// }
-
 		TableMeta tableMeta = table.getTableMeta();
-		Point point = (Point) step.getObject();
-		int x = tableMeta.getColumnNames().indexOf(point.getX());
+		int x = 0;
 		int y = 0;
 
-		InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
-				tableMeta.getRowMapToTemplateItemTypeTerm(), tableMeta.getRowMapToTemplateItemTerm());
+		String colAttributeValue = findRawAttributeValue(context.getInstanceItem(),
+				tableMeta.getColMapToTemplateItemTypeTerm(), tableMeta.getColMapToTemplateItemTerm(),
+				tableMeta.getColMapToAttribute());
+		if (colAttributeValue != null) {
+			for (Matchable<?> rateTableRowMeta : tableMeta.getColumns()) {
+				if (((Matchable<String>) rateTableRowMeta).match(colAttributeValue)) {
+					x = (int) rateTableRowMeta.getIndex();
+					break;
+				}
+			}
+		}
 
-		if (matchedInstanceItem != null) {
-			Object attributeValue = matchedInstanceItem.getAttributes().get(tableMeta.getRowMapToAttribute());
-			TableRowMeta rateTableRowMeta = tableMeta.getRows().stream().filter(item -> item.match(attributeValue))
-					.findFirst().orElse(null);
-			y = rateTableRowMeta.getIndex();
+		String rowAttributeValue = findRawAttributeValue(context.getInstanceItem(),
+				tableMeta.getRowMapToTemplateItemTypeTerm(), tableMeta.getRowMapToTemplateItemTerm(),
+				tableMeta.getRowMapToAttribute());
+		if (rowAttributeValue != null) {
+			for (Matchable<?> rateTableRowMeta : tableMeta.getRows()) {
+				if (((Matchable<String>) rateTableRowMeta).match(rowAttributeValue)) {
+					y = (int) rateTableRowMeta.getIndex();
+					break;
+				}
+			}
+		}
+
+		if (y < 0) {
+			throw new RuntimeException("TODO ffffffffffff");
 		}
 
 		return table.getData()[y][x];

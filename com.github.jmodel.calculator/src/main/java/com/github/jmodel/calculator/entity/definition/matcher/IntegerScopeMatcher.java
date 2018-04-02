@@ -1,9 +1,10 @@
-package com.github.jmodel.calculator.entity.definition.table;
+package com.github.jmodel.calculator.entity.definition.matcher;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.jmodel.calculator.entity.definition.Matchable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IntegerScopeRowMeta extends TableRowMeta {
+public class IntegerScopeMatcher extends Matchable<Integer> {
 
 	private int maxValue;
 
@@ -46,8 +47,7 @@ public class IntegerScopeRowMeta extends TableRowMeta {
 	}
 
 	@Override
-	public boolean match(Object object) {
-		Integer value = (Integer) object;
+	public boolean match(Integer value) {
 		boolean bln = false;
 		if (includeMax) {
 			bln = (value <= maxValue);
