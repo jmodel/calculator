@@ -18,7 +18,7 @@ import com.github.jmodel.calculator.entity.template.TemplateItem;
 /**
  * 
  * 
- * @author johnson.ni@ebaotech.com
+ * @author jianni@hotmail.com
  *
  */
 public abstract class StepFunc implements BiConsumer<Context, Step> {

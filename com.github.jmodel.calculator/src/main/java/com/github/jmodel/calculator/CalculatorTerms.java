@@ -1,11 +1,18 @@
 package com.github.jmodel.calculator;
 
+/**
+ * Term is the most important thing for a domain. People communicates with
+ * common language which named Term.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
 public interface CalculatorTerms {
 
 	// step
 
 	public final static String STEP_TABLE = "STEP_TABLE";
-	
+
 	public final static String STEP_TREE = "STEP_TREE";
 
 	public final static String STEP_DISC = "STEP_DISC";

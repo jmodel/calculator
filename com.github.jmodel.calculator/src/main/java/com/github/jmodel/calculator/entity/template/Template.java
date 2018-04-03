@@ -7,7 +7,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Template extends TemplateItem {
 
+	private String version;
+
 	private Map<String, Map<String, TemplateItem>> subTemplateItemMaps;
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	public Map<String, Map<String, TemplateItem>> getSubTemplateItemMaps() {
 		return subTemplateItemMaps;

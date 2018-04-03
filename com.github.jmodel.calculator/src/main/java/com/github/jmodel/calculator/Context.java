@@ -5,14 +5,34 @@ import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.template.Template;
 import com.github.jmodel.calculator.entity.template.TemplateItem;
 
+/**
+ * Context is used in calculation procedure. A calculation procedure is defined
+ * at instance item level. Per instance item has own context instance.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
 public final class Context {
 
+	/**
+	 * Template is a kind of particular TemplateItem which can be parent of other
+	 * TemplateItem.
+	 */
 	private Template template;
 
+	/**
+	 * All of TemplateItem is the first child level of Template.
+	 */
 	private TemplateItem templateItem;
 
+	/**
+	 * Instance is a kind of particular InstanceItem which includes Aggregation.
+	 */
 	private Instance instance;
 
+	/**
+	 * InstanceItem support hierarchical structure.
+	 */
 	private InstanceItem instanceItem;
 
 	public Template getTemplate() {
