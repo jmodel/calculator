@@ -35,7 +35,7 @@ public final class TableStepFunc extends StepFunc {
 	@Override
 	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 
-		// find corresponding table
+		// find table
 		Table table = null;
 		for (Router router : context.getTemplateItem().getRouters()) {
 			if (!(router.getDataSource() instanceof Table)) {
@@ -98,7 +98,7 @@ public final class TableStepFunc extends StepFunc {
 			throw new RuntimeException("TODO ffffffffffff");
 		}
 
-		return table.getData()[y][x];
+		return new BigDecimal(table.getRawData()[y][x]);
 	}
 
 }

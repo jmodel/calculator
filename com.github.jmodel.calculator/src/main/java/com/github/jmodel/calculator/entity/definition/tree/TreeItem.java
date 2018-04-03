@@ -1,7 +1,9 @@
 package com.github.jmodel.calculator.entity.definition.tree;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.definition.Matchable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public final class TreeItem {
 
 	private String term;

@@ -1,5 +1,8 @@
 package com.github.jmodel.calculator.entity.definition.tree;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TreeItemMeta {
 
 	private String mapToTemplateItemTypeTerm;

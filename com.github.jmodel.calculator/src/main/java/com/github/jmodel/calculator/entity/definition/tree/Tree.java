@@ -2,8 +2,10 @@ package com.github.jmodel.calculator.entity.definition.tree;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.definition.DataSource;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Tree implements DataSource {
 
 	/**

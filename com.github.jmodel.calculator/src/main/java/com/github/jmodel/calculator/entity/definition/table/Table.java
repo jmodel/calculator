@@ -1,7 +1,5 @@
 package com.github.jmodel.calculator.entity.definition.table;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.definition.DataSource;
 
@@ -10,7 +8,7 @@ public class Table implements DataSource {
 
 	private TableMeta tableMeta;
 
-	private BigDecimal[][] data;
+	private String[][] rawData;
 
 	public TableMeta getTableMeta() {
 		return tableMeta;
@@ -20,12 +18,12 @@ public class Table implements DataSource {
 		this.tableMeta = tableMeta;
 	}
 
-	public BigDecimal[][] getData() {
-		return data;
+	public String[][] getRawData() {
+		return rawData;
 	}
 
-	public void setData(BigDecimal[][] data) {
-		this.data = data;
+	public void setRawData(String[][] rawData) {
+		this.rawData = rawData;
 	}
 
 }
