@@ -3,7 +3,7 @@ package com.github.jmodel.calculator.entity.definition;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class Matchable<T> {
+public abstract class Matchable {
 
 	private long index;
 
@@ -15,5 +15,5 @@ public abstract class Matchable<T> {
 		this.index = index;
 	}
 
-	public abstract boolean match(T value);
+	public abstract boolean match(String value);
 }

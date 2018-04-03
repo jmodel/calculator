@@ -7,9 +7,9 @@ import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.definition.Condition;
 import com.github.jmodel.calculator.entity.definition.Router;
 import com.github.jmodel.calculator.entity.definition.StepDef;
-import com.github.jmodel.calculator.entity.definition.table.Table;
 import com.github.jmodel.calculator.entity.definition.tree.Tree;
 import com.github.jmodel.calculator.entity.definition.tree.TreeItem;
+import com.github.jmodel.calculator.entity.definition.tree.TreeItemMeta;
 import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.instance.Step;
 
@@ -36,18 +36,10 @@ public final class TreeStepFunc extends StepFunc {
 	@Override
 	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 
-		Tree tree = new Tree();
-		List<?> pathList = (List<?>) step.getObject();
-		for (int layer = 0; layer < pathList.size(); layer++) {
-
-			TreeItem<?> leftTreeItem = tree.getData()[2 * layer];
-
-		}
-
-		// find corresponding table
-		Table table = null;
+		// find tree
+		Tree tree = null;
 		for (Router router : context.getTemplateItem().getRouters()) {
-			if (!(router.getDataSource() instanceof Table)) {
+			if (!(router.getDataSource() instanceof Tree)) {
 				continue;
 			}
 
@@ -55,12 +47,10 @@ public final class TreeStepFunc extends StepFunc {
 			List<Condition> conditions = router.getConditions();
 			if (conditions != null && conditions.size() > 0) {
 				for (Condition condition : conditions) {
-
 					InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
 							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm());
 					if (matchedInstanceItem != null) {
-						String attributeValue = (String) matchedInstanceItem.getAttributes()
-								.get(condition.getMapToAttribute());
+						String attributeValue = matchedInstanceItem.getAttributes().get(condition.getMapToAttribute());
 						if (!(condition.getExpectValue().equals(attributeValue))) {
 							passed = false;
 							break;
@@ -69,22 +59,63 @@ public final class TreeStepFunc extends StepFunc {
 				}
 			}
 			if (passed) {
-				table = (Table) (router.getDataSource());
+				tree = (Tree) (router.getDataSource());
 			}
 		}
 
-		if (table == null) {
+		if (tree == null) {
 			throw new RuntimeException("TODO xxxxxxxxxxxxxxxxx");
 		}
+		
+		int layers = (int) step.getObject();
+		TreeItem rootTreeItem = tree.getData()[0];
+		String rawValue = null;
+		if (layers > 0) {
+			rawValue = findRawValue(context.getInstanceItem(), tree, rootTreeItem, layers);
+		} else {
+			rawValue = rootTreeItem.getRawValue();
+		}
 
-		// if (coverage.getQuotation().isMonthly()) {
-		// rateTable = coverageDef.getMonthlyRateTable();
-		// }
+		return new BigDecimal(rawValue);
+	}
 
-		int x = 0;
-		int y = 0;
+	private String findRawValue(InstanceItem instanceItem, Tree tree, TreeItem parentTreeItem, final int layers) {
 
-		return table.getData()[y][x];
+		int parentIndex = parentTreeItem.getIndex();
+		TreeItem leftTreeItem = tree.getData()[2 * parentIndex];
+		TreeItem rightTreeItem = tree.getData()[(2 * parentIndex) + 1];
+		if (parentTreeItem.getLayer() == (layers - 1)) {
+			// seek raw value in the next layer
+			if (leftTreeItem != null && check(instanceItem, tree, leftTreeItem)) {
+				return leftTreeItem.getRawValue();
+			} else {
+				if (rightTreeItem != null && check(instanceItem, tree, rightTreeItem)) {
+					return rightTreeItem.getRawValue();
+				} else {
+					throw new RuntimeException("at least one side tree item should be defined");
+				}
+			}
+		} else {
+			if (leftTreeItem != null && check(instanceItem, tree, leftTreeItem)) {
+				return findRawValue(instanceItem, tree, leftTreeItem, layers);
+			} else {
+				if (rightTreeItem != null && check(instanceItem, tree, rightTreeItem)) {
+					return findRawValue(instanceItem, tree, rightTreeItem, layers);
+				} else {
+					throw new RuntimeException("at least one side tree item should be defined");
+				}
+			}
+		}
+	}
+
+	private boolean check(InstanceItem instanceItem, Tree tree, TreeItem treeItem) {
+		TreeItemMeta treeItemMeta = tree.getTreeItemMetas().get(treeItem.getTerm());
+		String rawAttributeValue = findRawAttributeValue(instanceItem, treeItemMeta.getMapToTemplateItemTypeTerm(),
+				treeItemMeta.getMapToTemplateItemTerm(), treeItemMeta.getMapToAttribute());
+		if (treeItem.getMatcher().match(rawAttributeValue)) {
+			return true;
+		}
+		return false;
 	}
 
 }

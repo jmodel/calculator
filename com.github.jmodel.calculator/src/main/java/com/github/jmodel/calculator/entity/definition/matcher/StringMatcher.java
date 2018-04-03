@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.definition.Matchable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class StringMatcher extends Matchable<String> {
+public class StringMatcher extends Matchable {
 
 	private String expectValue;
 

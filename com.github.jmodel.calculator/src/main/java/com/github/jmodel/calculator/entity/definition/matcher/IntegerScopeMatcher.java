@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.definition.Matchable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IntegerScopeMatcher extends Matchable<Integer> {
+public class IntegerScopeMatcher extends Matchable {
 
 	private int maxValue;
 
@@ -47,7 +47,8 @@ public class IntegerScopeMatcher extends Matchable<Integer> {
 	}
 
 	@Override
-	public boolean match(Integer value) {
+	public boolean match(String oldValue) {
+		Integer value = Integer.valueOf(oldValue);
 		boolean bln = false;
 		if (includeMax) {
 			bln = (value <= maxValue);

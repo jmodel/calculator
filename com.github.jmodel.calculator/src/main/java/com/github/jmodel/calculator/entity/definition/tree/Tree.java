@@ -6,9 +6,12 @@ import com.github.jmodel.calculator.entity.definition.DataSource;
 
 public class Tree implements DataSource {
 
+	/**
+	 * Tree item meta info is defined at Tree level for performance reason.
+	 */
 	private Map<String, TreeItemMeta> treeItemMetas;
 
-	private TreeItem<?>[] data;
+	private TreeItem[] data;
 
 	public Map<String, TreeItemMeta> getTreeItemMetas() {
 		return treeItemMetas;
@@ -18,11 +21,11 @@ public class Tree implements DataSource {
 		this.treeItemMetas = treeItemMetas;
 	}
 
-	public TreeItem<?>[] getData() {
+	public TreeItem[] getData() {
 		return data;
 	}
 
-	public void setData(TreeItem<?>[] data) {
+	public void setData(TreeItem[] data) {
 		this.data = data;
 	}
 

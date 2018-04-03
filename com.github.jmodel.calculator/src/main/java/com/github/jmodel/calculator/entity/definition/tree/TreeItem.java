@@ -1,20 +1,20 @@
 package com.github.jmodel.calculator.entity.definition.tree;
 
-import java.math.BigDecimal;
+import com.github.jmodel.calculator.entity.definition.Matchable;
 
-public abstract class TreeItem<T> {
+public final class TreeItem {
 
 	private String term;
 
-	private long layer;
+	private int layer;
 
-	private long index;
+	private int index;
 
 	private boolean isLeft;
 
-	private T condition;
+	private Matchable matcher;
 
-	private BigDecimal value;
+	private String rawValue;
 
 	public String getTerm() {
 		return term;
@@ -24,19 +24,19 @@ public abstract class TreeItem<T> {
 		this.term = term;
 	}
 
-	public long getLayer() {
+	public int getLayer() {
 		return layer;
 	}
 
-	public void setLayer(long layer) {
+	public void setLayer(int layer) {
 		this.layer = layer;
 	}
 
-	public long getIndex() {
+	public int getIndex() {
 		return index;
 	}
 
-	public void setIndex(long index) {
+	public void setIndex(int index) {
 		this.index = index;
 	}
 
@@ -48,20 +48,20 @@ public abstract class TreeItem<T> {
 		this.isLeft = isLeft;
 	}
 
-	public T getCondition() {
-		return condition;
+	public Matchable getMatcher() {
+		return matcher;
 	}
 
-	public void setCondition(T condition) {
-		this.condition = condition;
+	public void setMatcher(Matchable matcher) {
+		this.matcher = matcher;
 	}
 
-	public BigDecimal getValue() {
-		return value;
+	public String getRawValue() {
+		return rawValue;
 	}
 
-	public void setValue(BigDecimal value) {
-		this.value = value;
+	public void setRawValue(String rawValue) {
+		this.rawValue = rawValue;
 	}
 
 }

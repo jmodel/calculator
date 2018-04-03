@@ -8,9 +8,9 @@ import com.github.jmodel.calculator.entity.definition.Matchable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TableMeta {
 
-	private List<Matchable<?>> columns;
+	private List<Matchable> columns;
 
-	private List<Matchable<?>> rows;
+	private List<Matchable> rows;
 
 	private String colMapToTemplateItemTypeTerm;
 
@@ -24,19 +24,19 @@ public class TableMeta {
 
 	private String rowMapToAttribute;
 
-	public List<Matchable<?>> getColumns() {
+	public List<Matchable> getColumns() {
 		return columns;
 	}
 
-	public void setColumns(List<Matchable<?>> columns) {
+	public void setColumns(List<Matchable> columns) {
 		this.columns = columns;
 	}
 
-	public List<Matchable<?>> getRows() {
+	public List<Matchable> getRows() {
 		return rows;
 	}
 
-	public void setRows(List<Matchable<?>> rows) {
+	public void setRows(List<Matchable> rows) {
 		this.rows = rows;
 	}
 

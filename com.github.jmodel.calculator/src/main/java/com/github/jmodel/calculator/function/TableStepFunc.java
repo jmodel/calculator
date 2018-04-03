@@ -32,7 +32,6 @@ public final class TableStepFunc extends StepFunc {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 
@@ -75,8 +74,8 @@ public final class TableStepFunc extends StepFunc {
 				tableMeta.getColMapToTemplateItemTypeTerm(), tableMeta.getColMapToTemplateItemTerm(),
 				tableMeta.getColMapToAttribute());
 		if (colAttributeValue != null) {
-			for (Matchable<?> rateTableRowMeta : tableMeta.getColumns()) {
-				if (((Matchable<String>) rateTableRowMeta).match(colAttributeValue)) {
+			for (Matchable rateTableRowMeta : tableMeta.getColumns()) {
+				if (rateTableRowMeta.match(colAttributeValue)) {
 					x = (int) rateTableRowMeta.getIndex();
 					break;
 				}
@@ -87,8 +86,8 @@ public final class TableStepFunc extends StepFunc {
 				tableMeta.getRowMapToTemplateItemTypeTerm(), tableMeta.getRowMapToTemplateItemTerm(),
 				tableMeta.getRowMapToAttribute());
 		if (rowAttributeValue != null) {
-			for (Matchable<?> rateTableRowMeta : tableMeta.getRows()) {
-				if (((Matchable<String>) rateTableRowMeta).match(rowAttributeValue)) {
+			for (Matchable rateTableRowMeta : tableMeta.getRows()) {
+				if (rateTableRowMeta.match(rowAttributeValue)) {
 					y = (int) rateTableRowMeta.getIndex();
 					break;
 				}
