@@ -1,4 +1,4 @@
-package com.github.jmodel.calculator.entity.definition;
+package com.github.jmodel.calculator.entity.template;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

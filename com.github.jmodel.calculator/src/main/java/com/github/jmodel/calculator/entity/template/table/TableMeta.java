@@ -1,9 +1,9 @@
-package com.github.jmodel.calculator.entity.definition.table;
+package com.github.jmodel.calculator.entity.template.table;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.jmodel.calculator.entity.definition.Matchable;
+import com.github.jmodel.calculator.entity.template.Matchable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TableMeta {

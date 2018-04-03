@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.github.jmodel.calculator.Context;
-import com.github.jmodel.calculator.entity.definition.Condition;
-import com.github.jmodel.calculator.entity.definition.Router;
-import com.github.jmodel.calculator.entity.definition.StepDef;
-import com.github.jmodel.calculator.entity.definition.tree.Tree;
-import com.github.jmodel.calculator.entity.definition.tree.TreeItem;
-import com.github.jmodel.calculator.entity.definition.tree.TreeItemMeta;
 import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.instance.Step;
+import com.github.jmodel.calculator.entity.template.Condition;
+import com.github.jmodel.calculator.entity.template.Router;
+import com.github.jmodel.calculator.entity.template.StepDef;
+import com.github.jmodel.calculator.entity.template.tree.Tree;
+import com.github.jmodel.calculator.entity.template.tree.TreeItem;
+import com.github.jmodel.calculator.entity.template.tree.TreeItemMeta;
 
 public final class TreeStepFunc extends StepFunc {
 

@@ -3,8 +3,8 @@ package com.github.jmodel.calculator.function;
 import java.math.BigDecimal;
 
 import com.github.jmodel.calculator.Context;
-import com.github.jmodel.calculator.entity.definition.StepDef;
 import com.github.jmodel.calculator.entity.instance.Step;
+import com.github.jmodel.calculator.entity.template.StepDef;
 
 public final class MultipleStepFunc extends StepFunc {
 

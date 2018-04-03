@@ -6,14 +6,14 @@ import java.util.function.BiConsumer;
 
 import com.github.jmodel.calculator.CalculatorTerms;
 import com.github.jmodel.calculator.Context;
-import com.github.jmodel.calculator.entity.definition.AggregationDef;
-import com.github.jmodel.calculator.entity.definition.Condition;
-import com.github.jmodel.calculator.entity.definition.StepDef;
-import com.github.jmodel.calculator.entity.definition.Template;
-import com.github.jmodel.calculator.entity.definition.TemplateItem;
 import com.github.jmodel.calculator.entity.instance.Instance;
 import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.instance.Step;
+import com.github.jmodel.calculator.entity.template.AggregationDef;
+import com.github.jmodel.calculator.entity.template.Condition;
+import com.github.jmodel.calculator.entity.template.StepDef;
+import com.github.jmodel.calculator.entity.template.Template;
+import com.github.jmodel.calculator.entity.template.TemplateItem;
 
 /**
  * 

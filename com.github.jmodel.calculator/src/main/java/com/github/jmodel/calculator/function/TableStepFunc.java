@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.github.jmodel.calculator.Context;
-import com.github.jmodel.calculator.entity.definition.Condition;
-import com.github.jmodel.calculator.entity.definition.Matchable;
-import com.github.jmodel.calculator.entity.definition.Router;
-import com.github.jmodel.calculator.entity.definition.StepDef;
-import com.github.jmodel.calculator.entity.definition.table.Table;
-import com.github.jmodel.calculator.entity.definition.table.TableMeta;
 import com.github.jmodel.calculator.entity.instance.Step;
+import com.github.jmodel.calculator.entity.template.Condition;
+import com.github.jmodel.calculator.entity.template.Matchable;
+import com.github.jmodel.calculator.entity.template.Router;
+import com.github.jmodel.calculator.entity.template.StepDef;
+import com.github.jmodel.calculator.entity.template.table.Table;
+import com.github.jmodel.calculator.entity.template.table.TableMeta;
 
 public final class TableStepFunc extends StepFunc {
 

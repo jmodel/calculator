@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.github.jmodel.calculator.entity.definition.Template;
+import com.github.jmodel.calculator.entity.template.Template;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Instance extends InstanceItem {

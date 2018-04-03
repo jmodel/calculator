@@ -1,9 +1,9 @@
 package com.github.jmodel.calculator;
 
-import com.github.jmodel.calculator.entity.definition.Template;
-import com.github.jmodel.calculator.entity.definition.TemplateItem;
 import com.github.jmodel.calculator.entity.instance.Instance;
 import com.github.jmodel.calculator.entity.instance.InstanceItem;
+import com.github.jmodel.calculator.entity.template.Template;
+import com.github.jmodel.calculator.entity.template.TemplateItem;
 
 public final class Context {
 
