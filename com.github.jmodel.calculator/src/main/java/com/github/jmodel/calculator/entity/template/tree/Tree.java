@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.template.DataSource;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Tree implements DataSource {
+public class Tree extends DataSource {
 
 	/**
 	 * Tree item meta info is defined at Tree level for performance reason.

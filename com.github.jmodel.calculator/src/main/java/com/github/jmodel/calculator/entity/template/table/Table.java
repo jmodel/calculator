@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.template.DataSource;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Table implements DataSource {
+public class Table extends DataSource {
 
 	private TableMeta tableMeta;
 

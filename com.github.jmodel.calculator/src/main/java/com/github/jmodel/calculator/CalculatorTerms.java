@@ -9,23 +9,33 @@ package com.github.jmodel.calculator;
  */
 public interface CalculatorTerms {
 
+	final static String namespace = CalculatorTerms.class.getPackage().getName();
+
+	// matcher
+
+	public final static String MATCHER_IGNORE = namespace + ":MATCHER_IGNORE";
+
+	public final static String MATCHER_STRING = namespace + ":MATCHER_STRING";
+
+	public final static String MATCHER_INTEGER_SCOPE = namespace + ":MATCHER_INTEGER_SCOPE";
+
 	// step
 
-	public final static String STEP_TABLE = "STEP_TABLE";
+	public final static String STEP_TABLE = namespace + ":STEP_TABLE";
 
-	public final static String STEP_TREE = "STEP_TREE";
+	public final static String STEP_TREE = namespace + ":STEP_TREE";
 
-	public final static String STEP_DISC = "STEP_DISC";
+	public final static String STEP_DISC = namespace + ":STEP_DISC";
 
-	public final static String STEP_MULTIPLE = "STEP_MULTIPLE";
+	public final static String STEP_MULTIPLE = namespace + ":STEP_MULTIPLE";
 
 	// operator
 
-	public final static String OPERATOR_ADD = "OPERATOR_ADD";
+	public final static String OPERATOR_ADD = namespace + ":OPERATOR_ADD";
 
-	public final static String OPERATOR_SUBSTRACT = "OPERATOR_SUBSTRACT";
+	public final static String OPERATOR_SUBSTRACT = namespace + ":OPERATOR_SUBSTRACT";
 
 	// aggregation
 
-	public final static String AGGREGATION = "AGGREGATION";
+	public final static String AGGREGATION = namespace + ":AGGREGATION";
 }
