@@ -1,5 +1,6 @@
 package com.github.jmodel.calculator.entity.instance;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -12,16 +13,26 @@ import com.github.jmodel.calculator.entity.template.Template;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InstanceItem extends Item {
 
+	@JsonIgnore
+	private InstanceItem parentInstanceItem;
+
 	private String templateTerm;
 
 	private Map<String, Map<String, InstanceItem>> subInstanceItemMaps;
 
-	@JsonIgnore
-	private InstanceItem parentInstanceItem;
-
 	private Map<String, String> attributes;
 
 	private List<Step> steps;
+
+	private BigDecimal value = BigDecimal.ZERO;
+
+	public InstanceItem getParentInstanceItem() {
+		return parentInstanceItem;
+	}
+
+	public void setParentInstanceItem(InstanceItem parentInstanceItem) {
+		this.parentInstanceItem = parentInstanceItem;
+	}
 
 	public String getTemplateTerm() {
 		return templateTerm;
@@ -39,14 +50,6 @@ public class InstanceItem extends Item {
 		this.subInstanceItemMaps = subInstanceItemMaps;
 	}
 
-	public InstanceItem getParentInstanceItem() {
-		return parentInstanceItem;
-	}
-
-	public void setParentInstanceItem(InstanceItem parentInstanceItem) {
-		this.parentInstanceItem = parentInstanceItem;
-	}
-
 	public Map<String, String> getAttributes() {
 		return attributes;
 	}
@@ -61,6 +64,14 @@ public class InstanceItem extends Item {
 
 	public void setSteps(List<Step> steps) {
 		this.steps = steps;
+	}
+
+	public BigDecimal getValue() {
+		return value;
+	}
+
+	public void setValue(BigDecimal value) {
+		this.value = value;
 	}
 
 	public final void execute(Template template, Instance instance, InstanceItem parentInstanceItem) {
