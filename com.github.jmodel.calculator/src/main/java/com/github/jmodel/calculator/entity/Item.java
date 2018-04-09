@@ -9,7 +9,8 @@ import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.template.TemplateItem;
 
 /**
- * Item is a calculable unit.
+ * Item is the basic unit of Template and Instance. Calculation is defined at
+ * Item level.
  * 
  * @author jianni@hotmail.com
  *

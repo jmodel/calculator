@@ -33,4 +33,25 @@ public final class Instance extends InstanceItem {
 		this.aggregations = aggregations;
 	}
 
+	public void execute() {
+		for (Map.Entry<String, Map<String, InstanceItem>> entry : getSubInstanceItemMaps().entrySet()) {
+			entry.getValue().forEach((iTerm, instanceItem) -> {
+				recurrenceExecute(getTemplate(), this, this, instanceItem);
+			});
+		}
+	}
+
+	private void recurrenceExecute(Template template, Instance instance, InstanceItem parentInstanceItem,
+			InstanceItem instanceItem) {
+
+		Map<String, Map<String, InstanceItem>> subInstanceItemMaps = instanceItem.getSubInstanceItemMaps();
+		if (subInstanceItemMaps != null && subInstanceItemMaps.size() > 0) {
+			for (Map.Entry<String, Map<String, InstanceItem>> entry : subInstanceItemMaps.entrySet()) {
+				entry.getValue().forEach((iTerm, subInstanceItem) -> {
+					recurrenceExecute(template, instance, instanceItem, subInstanceItem);
+				});
+			}
+		}
+		instanceItem.execute(template, instance, parentInstanceItem);
+	}
 }

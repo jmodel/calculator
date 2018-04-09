@@ -26,6 +26,8 @@ public class InstanceItem extends Item {
 
 	private BigDecimal value = BigDecimal.ZERO;
 
+	private boolean executable = false;
+
 	public InstanceItem getParentInstanceItem() {
 		return parentInstanceItem;
 	}
@@ -74,17 +76,33 @@ public class InstanceItem extends Item {
 		this.value = value;
 	}
 
+	public boolean isExecutable() {
+		return executable;
+	}
+
+	public void setExecutable(boolean executable) {
+		this.executable = executable;
+	}
+
 	public final void execute(Template template, Instance instance, InstanceItem parentInstanceItem) {
 
 		if (parentInstanceItem != null) {
 			this.setParentInstanceItem(parentInstanceItem);
 		}
 
+		if (!isExecutable()) {
+			return;
+		}
+		
 		Context context = new Context();
 		context.setTemplate(template);
 		context.setInstance(instance);
 		context.setInstanceItem(this);
 		context.setTemplateItem(template.getSubTemplateItemMaps().get(this.getTypeTerm()).get(this.getTemplateTerm()));
+
+		if (this.getSteps() == null) {
+			System.out.print("xx");
+		}
 
 		for (Step step : this.getSteps()) {
 			step.execute(context);
