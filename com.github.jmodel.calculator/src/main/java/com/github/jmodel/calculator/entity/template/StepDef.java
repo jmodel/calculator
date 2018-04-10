@@ -4,11 +4,23 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Step definition.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public final class StepDef {
 
+	/**
+	 * Term of type, e.g., Table Step, Tree Step, etc.
+	 */
 	private String typeTerm;
 
+	/**
+	 * Business Term
+	 */
 	private String term;
 
 	private Integer index;
