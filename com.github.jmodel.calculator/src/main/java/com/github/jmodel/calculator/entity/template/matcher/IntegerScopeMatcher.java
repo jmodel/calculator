@@ -47,8 +47,8 @@ public class IntegerScopeMatcher extends Matchable {
 	}
 
 	@Override
-	public boolean match(String oldValue) {
-		Integer value = Integer.valueOf(oldValue);
+	public boolean match(String rawValue) {
+		Integer value = Integer.valueOf(rawValue);
 		boolean bln = false;
 		if (includeMax) {
 			bln = (value <= maxValue);

@@ -6,6 +6,12 @@ import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.instance.Step;
 import com.github.jmodel.calculator.entity.template.StepDef;
 
+/**
+ * Multiple step.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
 public final class MultipleStepFunc extends StepFunc {
 
 	private static MultipleStepFunc instance;

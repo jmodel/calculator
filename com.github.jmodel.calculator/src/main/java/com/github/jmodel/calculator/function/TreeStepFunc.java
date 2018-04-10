@@ -47,7 +47,7 @@ public final class TreeStepFunc extends StepFunc {
 			List<Condition> conditions = router.getConditions();
 			if (conditions != null && conditions.size() > 0) {
 				for (Condition condition : conditions) {
-					InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
+					InstanceItem matchedInstanceItem = findInstanceItem(context.getInstanceItem(),
 							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm());
 					if (matchedInstanceItem != null) {
 						String attributeValue = matchedInstanceItem.getAttributes().get(condition.getMapToAttribute());

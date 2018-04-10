@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.jmodel.calculator.entity.instance.Instance;
 
 /**
- * Request is a wrapper of multiple instances.
+ * Request is wrapper of multiple instances.
  * 
  * @author jianni@hotmail.com
  *

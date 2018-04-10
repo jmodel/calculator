@@ -16,7 +16,7 @@ import com.github.jmodel.calculator.entity.template.Template;
 import com.github.jmodel.calculator.entity.template.TemplateItem;
 
 /**
- * 
+ * General calculation procedure of a step.
  * 
  * @author jianni@hotmail.com
  *
@@ -48,7 +48,7 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 			if (conditions != null && conditions.size() > 0) {
 				for (Condition condition : conditions) {
 
-					InstanceItem matchedInstanceItem = findInstanceElement(context.getInstanceItem(),
+					InstanceItem matchedInstanceItem = findInstanceItem(context.getInstanceItem(),
 							condition.getMapToTemplateItemTypeTerm(), condition.getMapToTemplateItemTerm());
 					if (matchedInstanceItem != null) {
 						String attributeValue = (String) matchedInstanceItem.getAttributes()
@@ -84,6 +84,19 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 		aggregate(template, instance, instanceItem, step);
 	}
 
+	/**
+	 * Aggregate values based on the definition of aggregation. The aggregation is
+	 * at instance level.
+	 * 
+	 * @param template
+	 *            template
+	 * @param instance
+	 *            instance
+	 * @param instanceItem
+	 *            current instance item
+	 * @param step
+	 *            step instance
+	 */
 	protected final void aggregate(Template template, Instance instance, InstanceItem instanceItem, Step step) {
 
 		instance.getAggregations().forEach((term, aggregation) -> {
@@ -100,9 +113,24 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 		});
 	}
 
+	/**
+	 * Get the raw value (String) of a attribute of the instance item which meets
+	 * conditions.
+	 * 
+	 * @param instanceItem
+	 *            the current instance item
+	 * @param mapToTemplateItemTypeTerm
+	 *            term of template item type
+	 * @param mapToTemplateItemTerm
+	 *            term of template item
+	 * @param mapToAttribute
+	 *            the attribute name of template item
+	 * @return the raw value of a attribute
+	 */
 	protected String findRawAttributeValue(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
 			String mapToTemplateItemTerm, String mapToAttribute) {
-		InstanceItem foundInstanceItem = findInstanceElement(instanceItem, mapToTemplateItemTypeTerm,
+
+		InstanceItem foundInstanceItem = findInstanceItem(instanceItem, mapToTemplateItemTypeTerm,
 				mapToTemplateItemTerm);
 		if (foundInstanceItem != null && foundInstanceItem.getAttributes() != null) {
 			return foundInstanceItem.getAttributes().get(mapToAttribute);
@@ -110,7 +138,19 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 		return null;
 	}
 
-	protected InstanceItem findInstanceElement(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
+	/**
+	 * Look for the instance item (by template item type term and template item
+	 * term) from current instance item up. Instance item is hierarchical.
+	 * 
+	 * @param instanceItem
+	 *            the current instance item
+	 * @param mapToTemplateItemTypeTerm
+	 *            term of template item type
+	 * @param mapToTemplateItemTerm
+	 *            term of template item
+	 * @return the instance item that meets conditions
+	 */
+	protected InstanceItem findInstanceItem(InstanceItem instanceItem, String mapToTemplateItemTypeTerm,
 			String mapToTemplateItemTerm) {
 
 		if (instanceItem.getTypeTerm().equals(mapToTemplateItemTypeTerm)
@@ -122,10 +162,24 @@ public abstract class StepFunc implements BiConsumer<Context, Step> {
 			return null;
 		}
 
-		return findInstanceElement(instanceItem.getParentInstanceItem(), mapToTemplateItemTypeTerm,
-				mapToTemplateItemTerm);
+		return findInstanceItem(instanceItem.getParentInstanceItem(), mapToTemplateItemTypeTerm, mapToTemplateItemTerm);
 	}
 
+	/**
+	 * Calculate the value of a step.
+	 * 
+	 * @param context
+	 *            context of calculation
+	 * @param stepDef
+	 *            definition of the step
+	 * @param step
+	 *            step instance
+	 * @param depStepDef
+	 *            definition of the dependent step
+	 * @param depStep
+	 *            dependent step instance
+	 * @return the value of the step
+	 */
 	protected abstract BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef,
 			Step depStep);
 }
