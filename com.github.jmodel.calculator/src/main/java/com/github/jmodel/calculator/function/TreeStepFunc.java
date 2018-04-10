@@ -3,6 +3,8 @@ package com.github.jmodel.calculator.function;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.github.jmodel.calculator.CalculationException;
+import com.github.jmodel.calculator.CalculatorTerms;
 import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.instance.InstanceItem;
 import com.github.jmodel.calculator.entity.instance.Step;
@@ -72,7 +74,7 @@ public class TreeStepFunc extends PickStepFunc {
 		}
 
 		if (tree == null) {
-			throw new RuntimeException("TODO xxxxxxxxxxxxxxxxx");
+			throw new CalculationException(CalculatorTerms.E_TREE_NOT_FOUND);
 		}
 
 		int layers = (int) step.getObject();
@@ -114,7 +116,7 @@ public class TreeStepFunc extends PickStepFunc {
 				if (rightTreeItem != null && check(instanceItem, tree, rightTreeItem)) {
 					return rightTreeItem.getRawValue();
 				} else {
-					throw new RuntimeException("at least one side tree item should be defined");
+					throw new CalculationException(CalculatorTerms.E_TREE_ITEM_NOT_DEFINED);
 				}
 			}
 		} else {
@@ -124,7 +126,7 @@ public class TreeStepFunc extends PickStepFunc {
 				if (rightTreeItem != null && check(instanceItem, tree, rightTreeItem)) {
 					return findRawValue(instanceItem, tree, rightTreeItem, layers);
 				} else {
-					throw new RuntimeException("at least one side tree item should be defined");
+					throw new CalculationException(CalculatorTerms.E_TREE_ITEM_NOT_DEFINED);
 				}
 			}
 		}

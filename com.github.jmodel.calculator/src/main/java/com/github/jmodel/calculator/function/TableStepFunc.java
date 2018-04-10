@@ -3,6 +3,8 @@ package com.github.jmodel.calculator.function;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.github.jmodel.calculator.CalculationException;
+import com.github.jmodel.calculator.CalculatorTerms;
 import com.github.jmodel.calculator.Context;
 import com.github.jmodel.calculator.entity.instance.Step;
 import com.github.jmodel.calculator.entity.template.Condition;
@@ -70,7 +72,7 @@ public class TableStepFunc extends PickStepFunc {
 		}
 
 		if (table == null) {
-			throw new RuntimeException("TODO xxxxxxxxxxxxxxxxx");
+			throw new CalculationException(CalculatorTerms.E_TABLE_NOT_FOUND);
 		}
 
 		TableMeta tableMeta = table.getTableMeta();
@@ -99,10 +101,6 @@ public class TableStepFunc extends PickStepFunc {
 					break;
 				}
 			}
-		}
-
-		if (y < 0) {
-			throw new RuntimeException("TODO ffffffffffff");
 		}
 
 		return new BigDecimal(table.getRawData()[y][x]);

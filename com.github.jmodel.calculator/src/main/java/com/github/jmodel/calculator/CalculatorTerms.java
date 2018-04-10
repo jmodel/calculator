@@ -36,4 +36,17 @@ public interface CalculatorTerms {
 	// aggregation
 
 	public final static String AGGREGATION = namespace + ":AGGREGATION";
+
+	// exception
+
+	public final static String E_INSTANCE_NOT_FOUND = "Instance to be calculated is not found";
+
+	public final static String E_TEMPLATE_NOT_FOUND = "Template is not found";
+
+	public final static String E_TABLE_NOT_FOUND = "Table is not found";
+
+	public final static String E_TREE_NOT_FOUND = "Tree is not found";
+
+	public final static String E_TREE_ITEM_NOT_DEFINED = "At least one side tree item should be defined";
+
 }
