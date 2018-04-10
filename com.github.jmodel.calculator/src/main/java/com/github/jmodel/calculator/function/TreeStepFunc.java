@@ -13,7 +13,16 @@ import com.github.jmodel.calculator.entity.template.tree.Tree;
 import com.github.jmodel.calculator.entity.template.tree.TreeItem;
 import com.github.jmodel.calculator.entity.template.tree.TreeItemMeta;
 
-public final class TreeStepFunc extends StepFunc {
+/**
+ * TreeStepFunc is the simplest step regarding table data. This step is often
+ * put at the first step of a calculation procedure, no dependent step, just
+ * pick up data from a tree. The result of this step would be used by subsequent
+ * steps.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
+public class TreeStepFunc extends PickStepFunc {
 
 	private static TreeStepFunc instance;
 
@@ -34,7 +43,7 @@ public final class TreeStepFunc extends StepFunc {
 	}
 
 	@Override
-	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
+	protected final BigDecimal pickup(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 
 		// find tree
 		Tree tree = null;
@@ -66,7 +75,7 @@ public final class TreeStepFunc extends StepFunc {
 		if (tree == null) {
 			throw new RuntimeException("TODO xxxxxxxxxxxxxxxxx");
 		}
-		
+
 		int layers = (int) step.getObject();
 		TreeItem rootTreeItem = tree.getData()[0];
 		String rawValue = null;
@@ -79,7 +88,8 @@ public final class TreeStepFunc extends StepFunc {
 		return new BigDecimal(rawValue);
 	}
 
-	private String findRawValue(InstanceItem instanceItem, Tree tree, TreeItem parentTreeItem, final int layers) {
+	protected final String findRawValue(InstanceItem instanceItem, Tree tree, TreeItem parentTreeItem,
+			final int layers) {
 
 		int parentIndex = parentTreeItem.getIndex();
 		TreeItem leftTreeItem = tree.getData()[2 * parentIndex];
@@ -108,7 +118,7 @@ public final class TreeStepFunc extends StepFunc {
 		}
 	}
 
-	private boolean check(InstanceItem instanceItem, Tree tree, TreeItem treeItem) {
+	protected final boolean check(InstanceItem instanceItem, Tree tree, TreeItem treeItem) {
 		TreeItemMeta treeItemMeta = tree.getTreeItemMetas().get(treeItem.getTerm());
 		String rawAttributeValue = findRawAttributeValue(instanceItem, treeItemMeta.getMapToTemplateItemTypeTerm(),
 				treeItemMeta.getMapToTemplateItemTerm(), treeItemMeta.getMapToAttribute());

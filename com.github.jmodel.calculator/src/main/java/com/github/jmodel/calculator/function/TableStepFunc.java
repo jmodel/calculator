@@ -12,7 +12,16 @@ import com.github.jmodel.calculator.entity.template.StepDef;
 import com.github.jmodel.calculator.entity.template.table.Table;
 import com.github.jmodel.calculator.entity.template.table.TableMeta;
 
-public final class TableStepFunc extends StepFunc {
+/**
+ * TableStepFunc is the simplest step regarding table data. This step is often
+ * put at the first step of a calculation procedure, no dependent step, just
+ * pick up data from a table. The result of this step would be used by
+ * subsequent steps.
+ * 
+ * @author jianni@hotmail.com
+ *
+ */
+public class TableStepFunc extends PickStepFunc {
 
 	private static TableStepFunc instance;
 
@@ -32,9 +41,7 @@ public final class TableStepFunc extends StepFunc {
 		}
 	}
 
-	@Override
-	protected BigDecimal calculate(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
-
+	protected final BigDecimal pickup(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 		// find table
 		Table table = null;
 		for (Router router : context.getTemplateItem().getRouters()) {
