@@ -14,10 +14,9 @@ import com.github.jmodel.calculator.entity.template.tree.TreeItem;
 import com.github.jmodel.calculator.entity.template.tree.TreeItemMeta;
 
 /**
- * TreeStepFunc is the simplest step regarding table data. This step is often
- * put at the first step of a calculation procedure, no dependent step, just
- * pick up data from a tree. The result of this step would be used by subsequent
- * steps.
+ * TreeStepFunc is the simplest step regarding tree data. This step is often put
+ * at the first step of a calculation procedure, no dependent step, just pick up
+ * data from a tree. The result of this step would be used by subsequent steps.
  * 
  * @author jianni@hotmail.com
  *
@@ -88,6 +87,19 @@ public class TreeStepFunc extends PickStepFunc {
 		return new BigDecimal(rawValue);
 	}
 
+	/**
+	 * Get raw value of matched tree item.
+	 * 
+	 * @param instanceItem
+	 *            instance item is used to find attribute raw value
+	 * @param tree
+	 *            tree instance
+	 * @param parentTreeItem
+	 *            parent tree item
+	 * @param layers
+	 *            layer of trying finding
+	 * @return the raw value of matched tree item
+	 */
 	protected final String findRawValue(InstanceItem instanceItem, Tree tree, TreeItem parentTreeItem,
 			final int layers) {
 
@@ -118,6 +130,17 @@ public class TreeStepFunc extends PickStepFunc {
 		}
 	}
 
+	/**
+	 * Check if the tree item meets the defined conditions.
+	 * 
+	 * @param instanceItem
+	 *            instance item is used to find attribute raw value
+	 * @param tree
+	 *            tree is used to get tree item meta info
+	 * @param treeItem
+	 *            tree item
+	 * @return return true if meet the defined condition
+	 */
 	protected final boolean check(InstanceItem instanceItem, Tree tree, TreeItem treeItem) {
 		TreeItemMeta treeItemMeta = tree.getTreeItemMetas().get(treeItem.getTerm());
 		String rawAttributeValue = findRawAttributeValue(instanceItem, treeItemMeta.getMapToTemplateItemTypeTerm(),
