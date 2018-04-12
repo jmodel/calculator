@@ -21,6 +21,8 @@ public interface CalculatorTerms {
 
 	// step
 
+	public final static String STEP_GET = namespace + ":STEP_GET";
+
 	public final static String STEP_TABLE = namespace + ":STEP_TABLE";
 
 	public final static String STEP_TREE = namespace + ":STEP_TREE";
