@@ -48,7 +48,7 @@ public class TreeStepFunc extends PickStepFunc {
 
 		// find tree
 		Tree tree = null;
-		for (Router router : context.getTemplateItem().getRouters()) {
+		for (Router router : stepDef.getRouters()) {
 			if (!(router.getDataSource() instanceof Tree)) {
 				continue;
 			}

@@ -46,7 +46,7 @@ public class TableStepFunc extends PickStepFunc {
 	protected final BigDecimal pickup(Context context, StepDef stepDef, Step step, StepDef depStepDef, Step depStep) {
 		// find table
 		Table table = null;
-		for (Router router : context.getTemplateItem().getRouters()) {
+		for (Router router : stepDef.getRouters()) {
 			if (!(router.getDataSource() instanceof Table)) {
 				continue;
 			}

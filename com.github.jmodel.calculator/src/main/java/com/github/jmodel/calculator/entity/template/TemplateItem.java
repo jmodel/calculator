@@ -12,8 +12,6 @@ public class TemplateItem extends Item {
 
 	private List<StepDef> stepDefs;
 
-	private List<Router> routers;
-
 	public List<String> getAttributes() {
 		return attributes;
 	}
@@ -28,14 +26,6 @@ public class TemplateItem extends Item {
 
 	public void setStepDefs(List<StepDef> stepDefs) {
 		this.stepDefs = stepDefs;
-	}
-
-	public List<Router> getRouters() {
-		return routers;
-	}
-
-	public void setRouters(List<Router> routers) {
-		this.routers = routers;
 	}
 
 }

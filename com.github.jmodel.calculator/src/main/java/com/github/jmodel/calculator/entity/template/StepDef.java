@@ -23,6 +23,9 @@ public final class StepDef {
 	 */
 	private String term;
 
+	/**
+	 * Index of the step in calculation procedure
+	 */
 	private Integer index;
 
 	private Integer depStepIndex;
@@ -31,7 +34,23 @@ public final class StepDef {
 
 	private boolean useCvalue = false;
 
+	/**
+	 * This step will be executed if meets the conditions
+	 */
 	private List<Condition> conditions;
+
+	/**
+	 * This step could use different data source
+	 */
+	private List<Router> routers;
+
+	//
+
+	private String mapToTemplateItemTypeTerm;
+
+	private String mapToTemplateItemTerm;
+
+	private String mapToAttribute;
 
 	public String getTypeTerm() {
 		return typeTerm;
@@ -87,6 +106,38 @@ public final class StepDef {
 
 	public void setConditions(List<Condition> conditions) {
 		this.conditions = conditions;
+	}
+
+	public List<Router> getRouters() {
+		return routers;
+	}
+
+	public void setRouters(List<Router> routers) {
+		this.routers = routers;
+	}
+
+	public String getMapToTemplateItemTypeTerm() {
+		return mapToTemplateItemTypeTerm;
+	}
+
+	public void setMapToTemplateItemTypeTerm(String mapToTemplateItemTypeTerm) {
+		this.mapToTemplateItemTypeTerm = mapToTemplateItemTypeTerm;
+	}
+
+	public String getMapToTemplateItemTerm() {
+		return mapToTemplateItemTerm;
+	}
+
+	public void setMapToTemplateItemTerm(String mapToTemplateItemTerm) {
+		this.mapToTemplateItemTerm = mapToTemplateItemTerm;
+	}
+
+	public String getMapToAttribute() {
+		return mapToAttribute;
+	}
+
+	public void setMapToAttribute(String mapToAttribute) {
+		this.mapToAttribute = mapToAttribute;
 	}
 
 }
