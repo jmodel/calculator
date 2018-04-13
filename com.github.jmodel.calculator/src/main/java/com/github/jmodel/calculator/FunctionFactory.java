@@ -19,7 +19,7 @@ import com.github.jmodel.japp.spi.BiConsumerFactory;
 public class FunctionFactory extends BiConsumerFactory {
 
 	@Override
-	protected void create(SortedMap<String, BiConsumer<?, ?>> map) {
+	protected void register(SortedMap<String, BiConsumer<?, ?>> map) {
 		map.put(CalculatorTerms.STEP_GET, GetStepFunc.getInstance());
 		map.put(CalculatorTerms.STEP_TABLE, TableStepFunc.getInstance());
 		map.put(CalculatorTerms.STEP_TREE, TreeStepFunc.getInstance());
